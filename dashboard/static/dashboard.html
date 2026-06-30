@@ -1,0 +1,1057 @@
+
+
+<!-- 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Reliability Platform Control Center</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            color: #1E293B;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            position: relative;
+            overflow-x: hidden;
+        }
+        /* Technical Dot Grid Overlay */
+        .grid-overlay {
+            position: fixed;
+            inset: 0;
+            background-image: radial-gradient(circle, rgba(15, 23, 42, 0.05) 1px, transparent 1px);
+            background-size: 24px 24px;
+            pointer-events: none;
+            z-index: 1;
+        }
+        header, main { position: relative; z-index: 10; }
+        /* Lighter Frosted Floating Cards providing crisp contrast over the blended background mesh */
+        .solid-card {
+            background: rgba(250, 250, 249, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 16px 36px 4px rgba(60, 70, 90, 0.15), 0 6px 16px 2px rgba(60, 70, 90, 0.08);
+            backdrop-filter: blur(16px);
+            transition: all 0.3s ease;
+        }
+        /* Crisper, lighter inner boxes for maximum layout isolation */
+        .inner-well {
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.01);
+        }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        /* Header white pulse ring animation */
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); opacity: 0.6; }
+            50% { opacity: 0.3; }
+            100% { transform: scale(2.2); opacity: 0; }
+        }
+        .animate-ring { animation: pulse-ring 2.5s infinite ease-in-out; }
+        /* Infrastructure Map: Vibrant green ripple with decreasing green color */
+        @keyframes green-pulse-ring {
+            0% { transform: scale(0.9); opacity: 0.8; background-color: rgba(16, 185, 129, 0.7); }
+            50% { opacity: 0.4; background-color: rgba(52, 211, 153, 0.4); }
+            100% { transform: scale(2.5); opacity: 0; background-color: rgba(167, 243, 208, 0.1); }
+        }
+        .animate-green-ring { animation: green-pulse-ring 2.0s infinite ease-in-out; }
+    </style>
+</head>
+<body class="min-h-screen p-6 sm:p-8 antialiased bg-gradient-to-tr from-[#526380] via-[#746585] to-[#6E8074]">
+    <div class="grid-overlay"></div>
+    <header class="max-w-7xl mx-auto mb-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 pb-6 border-b border-white/30">
+        <div>
+            <div class="flex items-center gap-4">
+                <div class="relative w-3 h-3 flex items-center justify-center">
+                    <span class="animate-ring absolute w-6 h-6 rounded-full bg-white/50"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-white shadow-[0_0_14px_rgba(255,255,255,0.95)]"></span>
+                </div>
+                <h1 class="text-3xl font-black tracking-normal text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)]">
+                    AGENT &nbsp; RELIABILITY &nbsp; PLATFORM
+                </h1>
+            </div>
+            <p class="text-[13px] text-white mt-2 font-extrabold tracking-widest uppercase mono bg-black/10 px-2.5 py-0.5 rounded-md inline-block">Autonomous Quality Gate & Telemetry Engine</p>
+        </div>
+        <div class="flex items-center gap-4">
+            <div class="solid-card px-4 py-2 rounded-xl text-[10px] font-black tracking-widest text-slate-800 uppercase border border-white/40">CORE INTEGRATION RUNTIME: ACTIVE</div>
+            <span class="mono text-xs px-3.5 py-2 rounded-xl inner-well text-slate-900 font-black">v1.1.0-beta</span>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div class="lg:col-span-4 space-y-6">
+            <div class="solid-card rounded-2xl p-6 relative overflow-hidden">
+                <h2 class="text-xs font-black uppercase tracking-widest text-slate-700 mb-5 flex items-center justify-between">
+                    <span>INFRASTRUCTURE HARDWARE MAP</span>
+                    <span class="flex h-3 w-3 relative items-center justify-center">
+                        <span class="animate-green-ring absolute inline-flex h-7 w-7 rounded-full"></span>
+                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.8)]"></span>
+                    </span>
+                </h2>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between inner-well rounded-xl p-4 hover:border-white transition-all duration-200">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 flex items-center justify-center bg-amber-200 border border-amber-400 rounded-lg text-slate-700 shadow-sm text-lg font-bold">📦</div>
+                            <div>
+                                <p class="text-sm font-bold text-slate-800 tracking-wide">Gitea Repository Server</p>
+                                <p class="text-[11px] text-slate-500 mono mt-0.5">Local Port 3000</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 mono text-xs">
+                            <span class="text-emerald-900 bg-emerald-200 border border-emerald-400 px-2 py-0.5 rounded-md font-black text-[10px] tracking-wider">ONLINE</span>
+                            <span class="text-slate-800 font-black min-w-[50px] text-right" id="gitea-latency">--ms</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between inner-well rounded-xl p-4 hover:border-white transition-all duration-200">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 flex items-center justify-center bg-sky-200 border border-sky-400 rounded-lg text-slate-700 shadow-sm text-lg font-bold">⚡</div>
+                            <div>
+                                <p class="text-sm font-bold text-slate-800 tracking-wide">Telemetry Platform API</p>
+                                <p class="text-[11px] text-slate-500 mono mt-0.5">Local Port 8000</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 mono text-xs">
+                            <span class="text-emerald-900 bg-emerald-200 border border-emerald-400 px-2 py-0.5 rounded-md font-black text-[10px] tracking-wider">ONLINE</span>
+                            <span class="text-slate-800 font-black min-w-[50px] text-right" id="api-latency">--ms</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="solid-card rounded-2xl p-6">
+                <h2 class="text-xs font-black uppercase tracking-widest text-slate-700 mb-5">CRITICAL QUALITY THRESHOLDS</h2>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="inner-well rounded-xl p-4">
+                        <p class="text-[10px] font-black text-slate-500 uppercase tracking-widest">Min Acceptance Gate</p>
+                        <p class="mono text-2xl font-black text-[#312e81] mt-1 tracking-tight">&ge; 0.70</p>
+                    </div>
+                    <div class="inner-well rounded-xl p-4 relative overflow-hidden">
+                        <p class="text-[10px] font-black text-slate-500 uppercase tracking-widest">Active Neural Engine</p>
+                        <p class="mono text-[11px] font-black text-[#4c1d95] mt-2.5 break-all leading-tight bg-violet-50 border border-violet-200 px-1.5 py-0.5 rounded" id="active-model-display">qwen2.5-coder:1.5b</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="lg:col-span-8">
+            <div class="flex justify-between items-center mb-3 px-1">
+                <h2 class="text-[13px] font-black uppercase tracking-widest text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]">TELEMETRY RUN PIPELINE STREAMS</h2>
+                <span class="text-[10px] font-black text-white uppercase tracking-widest flex items-center gap-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]">
+                    <span>Dynamic Streaming Sync Enabled</span>
+                    <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+                </span>
+            </div>
+            <div id="logs-wrapper" class="solid-card rounded-2xl p-6 space-y-6">
+                <div id="empty-state" class="py-20 text-center flex flex-col items-center justify-center">
+                    <div class="w-12 h-12 rounded-xl inner-well flex items-center justify-center text-xl mb-4 shadow-sm"></div>
+                    <p class="text-sm font-black text-slate-800 tracking-wide">Awaiting Execution Trace Blocks</p>
+                    <p class="text-xs text-slate-600 max-w-sm mt-1.5 leading-relaxed font-medium">Execute your background agent components inside your VS Code terminal window to stream pipeline diagnostics live.</p>
+                </div>
+                <div id="pipeline-content" class="hidden space-y-6">
+                    <div class="flex justify-between items-center flex-wrap gap-4 border-b border-slate-200 pb-5">
+                        <div class="flex items-center gap-3">
+                            <span id="gate-verdict"></span>
+                            <div class="inner-well px-3 py-1.5 rounded-xl">
+                                <span class="mono text-xs text-slate-600">
+                                    <span class="font-black text-slate-700">RUN_ID: </span> <span id="task-id-display" class="font-bold text-[#2563eb]"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-[11px] uppercase tracking-widest text-slate-500 font-black">Gate Certainty Score</p>
+                            <p id="confidence-display" class="mt-1 text-4xl font-black mono leading-none tracking-tighter text-[#15803d]"></p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2.5 text-xs mono inner-well px-3 py-2 rounded-xl">
+                        <span class="font-black text-stone-800">Workspace Target:</span>
+                        <span id="target-resource" class="font-bold text-[#2563eb]"></span>
+                    </div>
+                    <div class="inner-well rounded-xl p-4">
+                        <p class="text-[9px] uppercase tracking-widest text-slate-500 font-black mb-1.5">Telemetry Engine Reason Metric Output</p>
+                        <p id="reason-text" class="text-sm leading-relaxed font-bold text-[#78350f]"></p>
+                    </div>
+
+                    <div id="action-gateway-zone" class="hidden inner-well rounded-xl p-4 border border-rose-200 bg-rose-50/30 flex justify-between items-center transition-all duration-300">
+                        <div>
+                            <p class="text-[10px] font-black text-rose-800 uppercase tracking-widest">Autonomous Fix Ready</p>
+                            <p class="text-xs text-rose-950 font-medium mt-0.5">The debugger agent has compiled a structural patch for these defects.</p>
+                        </div>
+                        <button id="commit-fix-btn" class="mono text-xs font-bold bg-rose-600 hover:bg-rose-700 text-white px-4 py-2 rounded-xl shadow-md transition-all duration-200 transform hover:scale-[1.02]">
+                            APPROVE & COMMIT FIX
+                        </button>
+                    </div>
+
+                    <div class="flex justify-between items-center pt-1">
+                        <button id="toggle-trace-btn" class="text-xs font-black text-slate-700 hover:text-slate-900 transition-colors flex items-center gap-2 group">
+                            <svg id="chevron-icon" class="h-3 w-3 transform transition-transform duration-300 text-slate-700 group-hover:translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                            INSPECT ENGINE SUBPROCESS CONSOLE
+                        </button>
+                    </div>
+                    <div id="console-container" class="border border-slate-800 rounded-xl overflow-hidden shadow-inner hidden" style="background: #1e293b;">
+                        <div class="flex justify-between items-center px-4 py-2.5 bg-slate-900 border-b border-slate-800 text-[9px] uppercase font-black tracking-widest text-slate-400 mono">
+                            <span id="console-left-title">Pipeline Runtime Console Output</span>
+                            <span>LLM Inference Stream Logs</span>
+                        </div>
+                        <div id="console-body" class="p-4 mono text-xs space-y-2 max-h-80 overflow-y-auto leading-relaxed text-slate-300 font-medium"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        async function fetchLiveTraces() {
+            try {
+                const response = await fetch('/api/traces', { cache: 'no-store' });
+                if (!response.ok) return;
+                const traces = await response.json();
+                let latest = null;
+                if (Array.isArray(traces) && traces.length > 0) {
+                    latest = traces[traces.length - 1];
+                } else if (traces && !Array.isArray(traces) && Object.keys(traces).length > 0) {
+                    latest = traces;
+                }
+                const emptyState = document.getElementById('empty-state');
+                const pipelineContent = document.getElementById('pipeline-content');
+                const logsWrapper = document.getElementById('logs-wrapper');
+                const actionZone = document.getElementById('action-gateway-zone');
+
+                if (!latest) {
+                    emptyState.classList.remove('hidden');
+                    pipelineContent.classList.add('hidden');
+                    return;
+                }
+                emptyState.classList.add('hidden');
+                pipelineContent.classList.remove('hidden');
+                document.getElementById('task-id-display').textContent = latest.task_id || latest.run_id || 'unknown';
+                document.getElementById('target-resource').textContent = latest.target_resource || latest.repo || 'unknown_file';
+                
+                const isPassed = typeof latest.verdict === 'boolean' ? 
+                    latest.verdict : 
+                    String(latest.gate_verdict || latest.verdict || '').toUpperCase().includes('PASS');
+                const verdictBadge = document.getElementById('gate-verdict');
+                const confidenceDisplay = document.getElementById('confidence-display');
+                
+                if (isPassed) {
+                    actionZone.classList.add('hidden');
+                    verdictBadge.className = "bg-emerald-600 border border-emerald-700 text-white px-3.5 py-1.5 rounded-xl text-xs font-black tracking-widest flex items-center gap-1.5 shadow-[0_4px_12px_rgba(16,185,129,0.25)]";
+                    verdictBadge.innerHTML = 'GATE PASS ✓';
+                    logsWrapper.className = "solid-card rounded-2xl p-6 space-y-6 border-l-4 border-emerald-500 min-h-[445px] flex flex-col justify-start";
+                } else {
+                    actionZone.classList.remove('hidden');
+                    verdictBadge.className = "bg-rose-600 border border-rose-700 text-white px-3.5 py-1.5 rounded-xl text-xs font-black tracking-widest flex items-center gap-1.5 shadow-[0_4px_12px_rgba(244,63,94,0.25)]";
+                    verdictBadge.innerHTML = 'GATE FAIL ×';
+                    logsWrapper.className = "solid-card rounded-2xl p-6 space-y-6 border-l-4 border-rose-500 min-h-[445px] flex flex-col justify-start";
+                }
+                
+                let rawConf = parseFloat(latest.confidence || 0);
+                confidenceDisplay.textContent = rawConf > 1 ? (rawConf/100).toFixed(2) : rawConf.toFixed(2);
+                
+                if (latest.reasons || latest.reason) {
+                    document.getElementById('reason-text').textContent = Array.isArray(latest.reasons) ? latest.reasons.join(' ') : String(latest.reason);
+                }
+                const consoleBody = document.getElementById('console-body');
+                let logArray = latest.logs || latest.steps || [];
+                const isTextReportTask = String(latest.task || '').includes('review') || 
+                                         String(latest.task || '').includes('doc') || 
+                                         String(latest.task || '').includes('triage') || 
+                                         String(latest.task || '').includes('depend') || 
+                                         String(latest.reason || '').includes('depend') || 
+                                         String(latest.reason || '').includes('review') || 
+                                         String(latest.reason || '').includes('TEST');
+                
+                const aiReport = latest.ai_analysis || (latest.agent_detail && latest.agent_detail.ai_analysis);
+                if (isTextReportTask && aiReport) {
+                    if (typeof aiReport === 'string' && aiReport.includes('\n')) {
+                        logArray = aiReport.split('\n');
+                    } else {
+                        logArray = [aiReport];
+                    }
+                    const leftTitle = document.getElementById('console-left-title');
+                    if (leftTitle) {
+                        const taskStr = String(latest.task || '').toLowerCase();
+                        if (taskStr.includes('review')) leftTitle.textContent = "AI CODE REVIEW MANUAL";
+                        else if (taskStr.includes('doc')) leftTitle.textContent = "AI GENERATED SPECIFICATION MANUAL";
+                        else if (taskStr.includes('triage')) leftTitle.textContent = "AI TEST DETAILED TRIAGE REPORT";
+                        else if (taskStr.includes('depend')) leftTitle.textContent = "AI DEPENDENCY SECURITY & AUDIT REPORT";
+                        else leftTitle.textContent = "AI TELEMETRY ANALYSIS REPORT";
+                    }
+                } else {
+                    if (document.getElementById('console-left-title')) {
+                        document.getElementById('console-left-title').textContent = "PIPELINE RUNTIME CONSOLE OUTPUT";
+                    }
+                }
+                if (logArray.length > 0) {
+                    let processedLines = [];
+                    logArray.forEach(block => {
+                        if (typeof block === 'string' && block.includes('\n')) {
+                            processedLines.push(...block.split('\n'));
+                        } else {
+                            processedLines.push(block);
+                        }
+                    });
+                    consoleBody.innerHTML = processedLines.map(line => {
+                        let cleanLine = String(line).trim();
+                        if (!cleanLine) return '';
+                        let textClass = "text-slate-300 font-normal text-xs";
+                        let borderGlow = "border-slate-700/40 bg-slate-800/20";
+                        let displayLog = line;
+                        if (cleanLine.includes("FAILED") || cleanLine.includes("Error") || cleanLine.includes("Failure")) {
+                            textClass = "text-rose-400 font-bold";
+                            borderGlow = "border-rose-900/50 bg-rose-950/20";
+                        } else if (cleanLine.includes("Passed") || cleanLine.includes("Finished") || cleanLine.includes("Completed") || cleanLine.includes("complete")) {
+                            textClass = "text-emerald-400 font-semibold";
+                            borderGlow = "border-emerald-900/50 bg-emerald-950/20";
+                        } else if (isTextReportTask) {
+                            if (cleanLine.startsWith("# ")) {
+                                textClass = "text-slate-100 font-extrabold text-sm tracking-wide border-b border-slate-700 pb-1 mb-2 block";
+                                displayLog = cleanLine.replace("# ", "");
+                            } else if (cleanLine.startsWith("## ")) {
+                                textClass = "text-sky-400 font-bold text-xs tracking-wide mt-3 block";
+                                displayLog = cleanLine.replace("## ", "");
+                            } else {
+                                textClass = "text-slate-300 leading-relaxed font-normal text-xs";
+                                displayLog = line.replace(/\*\*/g, "");
+                            }
+                        }
+                        return `<p class="${textClass} border-l-2 ${borderGlow} pl-3 py-1.5 rounded-r-md transition-all duration-200 hover:bg-slate-700/40 hover:pl-4">${displayLog}</p>`;
+                    }).filter(html => html !== '').join('');
+                } else {
+                    const currentModelContext = latest.active_model || document.getElementById('active-model-display').textContent || 'qwen2.5-coder:1.5b';
+                    consoleBody.innerHTML = `
+                        <p class="text-slate-400 font-medium">[Orchestrator] Ingesting telemetry pipeline logs streams dynamically...</p>
+                        <p class="text-indigo-400 font-bold">[LLM Engine] Active Model Target verified as: ${currentModelContext}</p>
+                        <p class="text-emerald-400 font-bold">[Gate Engine] Final execution telemetry pass complete.</p>
+                    `;
+                }
+            } catch (err) {
+                console.error("Live sync polling failure:", err);
+            }
+        }
+
+        async function pingInfrastructure() {
+            const startApi = performance.now();
+            try {
+                await fetch('/api/traces', { cache: 'no-store' });
+                document.getElementById('api-latency').textContent = Math.round(performance.now() - startApi) + 'ms';
+                document.getElementById('api-latency').className = "text-emerald-900 font-black text-right";
+            } catch {
+                document.getElementById('api-latency').textContent = "ERR";
+                document.getElementById('api-latency').className = "text-rose-900 font-black text-right";
+            }
+            const startGitea = performance.now();
+            try {
+                await fetch('http://localhost:3000', { mode: 'no-cors', cache: 'no-store' });
+                document.getElementById('gitea-latency').textContent = Math.round(performance.now() - startGitea) + 'ms';
+                document.getElementById('gitea-latency').className = "text-emerald-900 font-black text-right";
+            } catch {
+                document.getElementById('gitea-latency').textContent = "OFFLINE";
+                document.getElementById('gitea-latency').className = "text-rose-900 font-black text-right text-[10px]";
+            }
+        }
+
+        const toggleBtn = document.getElementById('toggle-trace-btn');
+        const consoleContainer = document.getElementById('console-container');
+        const chevronIcon = document.getElementById('chevron-icon');
+        toggleBtn.addEventListener('click', () => {
+            if (consoleContainer.classList.contains('hidden')) {
+                consoleContainer.classList.remove('hidden');
+                chevronIcon.style.transform = 'rotate(180deg)';
+            } else {
+                consoleContainer.classList.add('hidden');
+                chevronIcon.style.transform = 'rotate(0deg)';
+            }
+        });
+
+        document.getElementById('commit-fix-btn').addEventListener('click', async () => {
+            const btn = document.getElementById('commit-fix-btn');
+            btn.textContent = "PATCHING ENVIRONMENT...";
+            btn.disabled = true;
+
+            try {
+                const response = await fetch('/api/commit-fix', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                
+                if (response.ok) {
+                    btn.textContent = "FIX APPLIED SUCCESSFULLY!";
+                    btn.className = "mono text-xs font-bold bg-emerald-600 text-white px-4 py-2 rounded-xl shadow-md cursor-not-allowed";
+                } else {
+                    btn.textContent = "PATCH CONTEXT FAILED";
+                    btn.disabled = false;
+                }
+            } catch (err) {
+                console.error("Action gateway routing error:", err);
+                btn.textContent = "ROUTING ERROR";
+                btn.disabled = false;
+            }
+        });
+
+        setInterval(fetchLiveTraces, 2000);
+        setInterval(pingInfrastructure, 4000);
+        fetchLiveTraces();
+        pingInfrastructure();
+    </script>
+</body>
+</html> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Reliability Platform Control Center</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            color: #1E293B;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            position: relative;
+            overflow-x: hidden;
+        }
+        /* Technical Dot Grid Overlay */
+        .grid-overlay {
+            position: fixed;
+            inset: 0;
+            background-image: radial-gradient(circle, rgba(15, 23, 42, 0.05) 1px, transparent 1px);
+            background-size: 24px 24px;
+            pointer-events: none;
+            z-index: 1;
+        }
+        header, main { position: relative; z-index: 10; }
+        /* Lighter Frosted Floating Cards providing crisp contrast over the blended background mesh */
+        .solid-card {
+            background: rgba(250, 250, 249, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 16px 36px 4px rgba(60, 70, 90, 0.15), 0 6px 16px 2px rgba(60, 70, 90, 0.08);
+            backdrop-filter: blur(16px);
+            transition: all 0.3s ease;
+        }
+        /* Crisper, lighter inner boxes for maximum layout isolation */
+        .inner-well {
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.01);
+        }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        /* Header white pulse ring animation */
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); opacity: 0.6; }
+            50% { opacity: 0.3; }
+            100% { transform: scale(2.2); opacity: 0; }
+        }
+        .animate-ring { animation: pulse-ring 2.5s infinite ease-in-out; }
+        /* Infrastructure Map: Vibrant green ripple with decreasing green color */
+        @keyframes green-pulse-ring {
+            0% { transform: scale(0.9); opacity: 0.8; background-color: rgba(16, 185, 129, 0.7); }
+            50% { opacity: 0.4; background-color: rgba(52, 211, 153, 0.4); }
+            100% { transform: scale(2.5); opacity: 0; background-color: rgba(167, 243, 208, 0.1); }
+        }
+        .animate-green-ring { animation: green-pulse-ring 2.0s infinite ease-in-out; }
+    </style>
+</head>
+<body class="min-h-screen p-6 sm:p-8 antialiased bg-gradient-to-tr from-[#526380] via-[#746585] to-[#6E8074]">
+    <div class="grid-overlay"></div>
+    <header class="max-w-7xl mx-auto mb-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 pb-6 border-b border-white/30">
+        <div>
+            <div class="flex items-center gap-4">
+                <div class="relative w-3 h-3 flex items-center justify-center">
+                    <span class="animate-ring absolute w-6 h-6 rounded-full bg-white/50"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-white shadow-[0_0_14px_rgba(255,255,255,0.95)]"></span>
+                </div>
+                <h1 class="text-3xl font-black tracking-normal text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)]">
+                    AGENT &nbsp; RELIABILITY &nbsp; PLATFORM
+                </h1>
+            </div>
+            <p class="text-[13px] text-white mt-2 font-extrabold tracking-widest uppercase mono bg-black/10 px-2.5 py-0.5 rounded-md inline-block">Autonomous Quality Gate & Telemetry Engine</p>
+        </div>
+        <div class="flex items-center gap-4">
+            <div class="solid-card px-4 py-2 rounded-xl text-[10px] font-black tracking-widest text-slate-800 uppercase border border-white/40">CORE INTEGRATION RUNTIME: ACTIVE</div>
+            <span class="mono text-xs px-3.5 py-2 rounded-xl inner-well text-slate-900 font-black">v1.1.0-beta</span>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div class="lg:col-span-4 space-y-6">
+            <div class="solid-card rounded-2xl p-6 relative overflow-hidden">
+                <h2 class="text-xs font-black uppercase tracking-widest text-slate-700 mb-5 flex items-center justify-between">
+                    <span>INFRASTRUCTURE HARDWARE MAP</span>
+                    <span class="flex h-3 w-3 relative items-center justify-center">
+                        <span class="animate-green-ring absolute inline-flex h-7 w-7 rounded-full"></span>
+                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.8)]"></span>
+                    </span>
+                </h2>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between inner-well rounded-xl p-4 hover:border-white transition-all duration-200">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 flex items-center justify-center bg-amber-200 border border-amber-400 rounded-lg text-slate-700 shadow-sm text-lg font-bold">📦</div>
+                            <div>
+                                <p class="text-sm font-bold text-slate-800 tracking-wide">Gitea Repository Server</p>
+                                <p class="text-[11px] text-slate-500 mono mt-0.5">Local Port 3000</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 mono text-xs">
+                            <span class="text-emerald-900 bg-emerald-200 border border-emerald-400 px-2 py-0.5 rounded-md font-black text-[10px] tracking-wider">ONLINE</span>
+                            <span class="text-slate-800 font-black min-w-[50px] text-right" id="gitea-latency">--ms</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between inner-well rounded-xl p-4 hover:border-white transition-all duration-200">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 flex items-center justify-center bg-sky-200 border border-sky-400 rounded-lg text-slate-700 shadow-sm text-lg font-bold">⚡</div>
+                            <div>
+                                <p class="text-sm font-bold text-slate-800 tracking-wide">Telemetry Platform API</p>
+                                <p class="text-[11px] text-slate-500 mono mt-0.5">Local Port 8000</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 mono text-xs">
+                            <span class="text-emerald-900 bg-emerald-200 border border-emerald-400 px-2 py-0.5 rounded-md font-black text-[10px] tracking-wider">ONLINE</span>
+                            <span class="text-slate-800 font-black min-w-[50px] text-right" id="api-latency">--ms</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="solid-card rounded-2xl p-6">
+                <h2 class="text-xs font-black uppercase tracking-widest text-slate-700 mb-5">CRITICAL QUALITY THRESHOLDS</h2>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="inner-well rounded-xl p-4">
+                        <p class="text-[10px] font-black text-slate-500 uppercase tracking-widest">Min Acceptance Gate</p>
+                        <p class="mono text-2xl font-black text-[#312e81] mt-1 tracking-tight">&ge; 0.70</p>
+                    </div>
+                    <div class="inner-well rounded-xl p-4 relative overflow-hidden">
+                        <p class="text-[10px] font-black text-slate-500 uppercase tracking-widest">Active Neural Engine</p>
+                        <p class="mono text-[11px] font-black text-[#4c1d95] mt-2.5 break-all leading-tight bg-violet-50 border border-violet-200 px-1.5 py-0.5 rounded" id="active-model-display">qwen2.5-coder:1.5b</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="lg:col-span-8">
+            <div class="flex justify-between items-center mb-3 px-1">
+                <h2 class="text-[13px] font-black uppercase tracking-widest text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]">TELEMETRY RUN PIPELINE STREAMS</h2>
+                <span class="text-[10px] font-black text-white uppercase tracking-widest flex items-center gap-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]">
+                    <span>Dynamic Streaming Sync Enabled</span>
+                    <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+                </span>
+            </div>
+            <div id="logs-wrapper" class="solid-card rounded-2xl p-6 space-y-6">
+                <div id="empty-state" class="py-20 text-center flex flex-col items-center justify-center">
+                    <div class="w-12 h-12 rounded-xl inner-well flex items-center justify-center text-xl mb-4 shadow-sm"></div>
+                    <p class="text-sm font-black text-slate-800 tracking-wide">Awaiting Execution Trace Blocks</p>
+                    <p class="text-xs text-slate-600 max-w-sm mt-1.5 leading-relaxed font-medium">Execute your background agent components inside your VS Code terminal window to stream pipeline diagnostics live.</p>
+                </div>
+                <div id="pipeline-content" class="hidden space-y-6">
+                    <div class="flex justify-between items-center flex-wrap gap-4 border-b border-slate-200 pb-5">
+                        <div class="flex items-center gap-3">
+                            <span id="gate-verdict"></span>
+                            <div class="inner-well px-3 py-1.5 rounded-xl">
+                                <span class="mono text-xs text-slate-600">
+                                    <span class="font-black text-slate-700">RUN_ID: </span> <span id="task-id-display" class="font-bold text-[#2563eb]"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-[11px] uppercase tracking-widest text-slate-500 font-black">Gate Certainty Score</p>
+                            <p id="confidence-display" class="mt-1 text-4xl font-black mono leading-none tracking-tighter text-[#15803d]"></p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2.5 text-xs mono inner-well px-3 py-2 rounded-xl">
+                        <span class="font-black text-stone-800">Workspace Target:</span>
+                        <span id="target-resource" class="font-bold text-[#2563eb]"></span>
+                    </div>
+                    <div class="inner-well rounded-xl p-4">
+                        <p class="text-[9px] uppercase tracking-widest text-slate-500 font-black mb-1.5">Telemetry Engine Reason Metric Output</p>
+                        <p id="reason-text" class="text-sm leading-relaxed font-bold text-[#78350f]"></p>
+                    </div>
+
+                    <div id="action-gateway-zone" class="hidden inner-well rounded-xl p-4 border border-rose-200 bg-rose-50/30 flex justify-between items-center transition-all duration-300">
+                        <div>
+                            <p class="text-[10px] font-black text-rose-800 uppercase tracking-widest">Autonomous Fix Ready</p>
+                            <p class="text-xs text-rose-950 font-medium mt-0.5">The debugger agent has compiled a structural patch for these defects.</p>
+                        </div>
+                        <button id="commit-fix-btn" class="mono text-xs font-bold bg-rose-600 hover:bg-rose-700 text-white px-4 py-2 rounded-xl shadow-md transition-all duration-200 transform hover:scale-[1.02]">
+                            APPROVE & COMMIT FIX
+                        </button>
+                    </div>
+
+                    <div class="flex justify-between items-center pt-1">
+                        <button id="toggle-trace-btn" class="text-xs font-black text-slate-700 hover:text-slate-900 transition-colors flex items-center gap-2 group">
+                            <svg id="chevron-icon" class="h-3 w-3 transform transition-transform duration-300 text-slate-700 group-hover:translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                            INSPECT ENGINE SUBPROCESS CONSOLE
+                        </button>
+                    </div>
+                    <div id="console-container" class="border border-slate-800 rounded-xl overflow-hidden shadow-inner hidden" style="background: #1e293b;">
+                        <div class="flex justify-between items-center px-4 py-2.5 bg-slate-900 border-b border-slate-800 text-[9px] uppercase font-black tracking-widest text-slate-400 mono">
+                            <span id="console-left-title">Pipeline Runtime Console Output</span>
+                            <span>LLM Inference Stream Logs</span>
+                        </div>
+                        <div id="console-body" class="p-4 mono text-xs space-y-2 max-h-80 overflow-y-auto leading-relaxed text-slate-300 font-medium"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+
+        // async function fetchLiveTraces() {
+        //     try {
+        //         const response = await fetch('/api/traces', { cache: 'no-store' });
+        //         if (!response.ok) return;
+        //         const traces = await response.json();
+        //         let latest = null;
+        //         if (Array.isArray(traces) && traces.length > 0) {
+        //             latest = traces[traces.length - 1];
+        //         } else if (traces && !Array.isArray(traces) && Object.keys(traces).length > 0) {
+        //             latest = traces;
+        //         }
+        //         const emptyState = document.getElementById('empty-state');
+        //         const pipelineContent = document.getElementById('pipeline-content');
+        //         const logsWrapper = document.getElementById('logs-wrapper');
+        //         const actionZone = document.getElementById('action-gateway-zone');
+
+        //         if (!latest) {
+        //             emptyState.classList.remove('hidden');
+        //             pipelineContent.classList.add('hidden');
+        //             return;
+        //         }
+        //         emptyState.classList.add('hidden');
+        //         pipelineContent.classList.remove('hidden');
+        //         document.getElementById('task-id-display').textContent = latest.task_id || latest.run_id || 'unknown';
+        //         document.getElementById('target-resource').textContent = latest.target_resource || latest.repo || 'unknown_file';
+                
+        //         const isPassed = typeof latest.verdict === 'boolean' ? 
+        //             latest.verdict : 
+        //             String(latest.gate_verdict || latest.verdict || '').toUpperCase().includes('PASS');
+        //         const verdictBadge = document.getElementById('gate-verdict');
+        //         const confidenceDisplay = document.getElementById('confidence-display');
+                
+        //         if (isPassed) {
+        //             actionZone.classList.add('hidden');
+        //             verdictBadge.className = "bg-emerald-600 border border-emerald-700 text-white px-3.5 py-1.5 rounded-xl text-xs font-black tracking-widest flex items-center gap-1.5 shadow-[0_4px_12px_rgba(16,185,129,0.25)]";
+        //             verdictBadge.innerHTML = 'GATE PASS ✓';
+        //             logsWrapper.className = "solid-card rounded-2xl p-6 space-y-6 border-l-4 border-emerald-500 min-h-[445px] flex flex-col justify-start";
+        //         } else {
+        //             actionZone.classList.remove('hidden');
+        //             verdictBadge.className = "bg-rose-600 border border-rose-700 text-white px-3.5 py-1.5 rounded-xl text-xs font-black tracking-widest flex items-center gap-1.5 shadow-[0_4px_12px_rgba(244,63,94,0.25)]";
+        //             verdictBadge.innerHTML = 'GATE FAIL ×';
+        //             logsWrapper.className = "solid-card rounded-2xl p-6 space-y-6 border-l-4 border-rose-500 min-h-[445px] flex flex-col justify-start";
+        //         }
+                
+        //         // Calculate the numerical confidence float safely
+        //         let rawConf = parseFloat(latest.confidence || 0);
+        //         let displayScore = rawConf > 1 ? (rawConf / 100).toFixed(2) : rawConf.toFixed(2);
+                
+        //         confidenceDisplay.textContent = displayScore;
+                
+        //         // FIXED: Force the score text color to change based on the explicit 0.70 threshold boundary
+        //         if (parseFloat(displayScore) >= 0.70) {
+        //             // Healthy certain score matches or exceeds requirement
+        //             confidenceDisplay.className = "text-4xl font-black text-emerald-600 mono leading-none tracking-tighter shadow-sm";
+        //         } else {
+        //             // Unhealthy or uncertain score falls below acceptable quality bounds
+        //             confidenceDisplay.className = "text-4xl font-black text-rose-600 mono leading-none tracking-tighter shadow-sm animate-pulse";
+        //         }
+                
+        //         if (latest.reasons || latest.reason) {
+        //             document.getElementById('reason-text').textContent = Array.isArray(latest.reasons) ? latest.reasons.join(' ') : String(latest.reason);
+        //         }
+        //         const consoleBody = document.getElementById('console-body');
+        //         let logArray = latest.logs || latest.steps || [];
+        //         const isTextReportTask = String(latest.task || '').includes('review') || 
+        //                                  String(latest.task || '').includes('doc') || 
+        //                                  String(latest.task || '').includes('triage') || 
+        //                                  String(latest.task || '').includes('depend') || 
+        //                                  String(latest.reason || '').includes('depend') || 
+        //                                  String(latest.reason || '').includes('review') || 
+        //                                  String(latest.reason || '').includes('TEST');
+                
+        //         const aiReport = latest.ai_analysis || (latest.agent_detail && latest.agent_detail.ai_analysis);
+        //         if (isTextReportTask && aiReport) {
+        //             if (typeof aiReport === 'string' && aiReport.includes('\n')) {
+        //                 logArray = aiReport.split('\n');
+        //             } else {
+        //                 logArray = [aiReport];
+        //             }
+        //             const leftTitle = document.getElementById('console-left-title');
+        //             if (leftTitle) {
+        //                 const taskStr = String(latest.task || '').toLowerCase();
+        //                 if (taskStr.includes('review')) leftTitle.textContent = "AI CODE REVIEW MANUAL";
+        //                 else if (taskStr.includes('doc')) leftTitle.textContent = "AI GENERATED SPECIFICATION MANUAL";
+        //                 else if (taskStr.includes('triage')) leftTitle.textContent = "AI TEST DETAILED TRIAGE REPORT";
+        //                 else if (taskStr.includes('depend')) leftTitle.textContent = "AI DEPENDENCY SECURITY & AUDIT REPORT";
+        //                 else leftTitle.textContent = "AI TELEMETRY ANALYSIS REPORT";
+        //             }
+        //         } else {
+        //             if (document.getElementById('console-left-title')) {
+        //                 document.getElementById('console-left-title').textContent = "PIPELINE RUNTIME CONSOLE OUTPUT";
+        //             }
+        //         }
+        //         if (logArray.length > 0) {
+        //             let processedLines = [];
+        //             logArray.forEach(block => {
+        //                 if (typeof block === 'string' && block.includes('\n')) {
+        //                     processedLines.push(...block.split('\n'));
+        //                 } else {
+        //                     processedLines.push(block);
+        //                 }
+        //             });
+        //             consoleBody.innerHTML = processedLines.map(line => {
+        //                 let cleanLine = String(line).trim();
+        //                 if (!cleanLine) return '';
+        //                 let textClass = "text-slate-300 font-normal text-xs";
+        //                 let borderGlow = "border-slate-700/40 bg-slate-800/20";
+        //                 let displayLog = line;
+        //                 if (cleanLine.includes("FAILED") || cleanLine.includes("Error") || cleanLine.includes("Failure")) {
+        //                     textClass = "text-rose-400 font-bold";
+        //                     borderGlow = "border-rose-900/50 bg-rose-950/20";
+        //                 } else if (cleanLine.includes("Passed") || cleanLine.includes("Finished") || cleanLine.includes("Completed") || cleanLine.includes("complete")) {
+        //                     textClass = "text-emerald-400 font-semibold";
+        //                     borderGlow = "border-emerald-900/50 bg-emerald-950/20";
+        //                 } else if (isTextReportTask) {
+        //                     if (cleanLine.startsWith("# ")) {
+        //                         textClass = "text-slate-100 font-extrabold text-sm tracking-wide border-b border-slate-700 pb-1 mb-2 block";
+        //                         displayLog = cleanLine.replace("# ", "");
+        //                     } else if (cleanLine.startsWith("## ")) {
+        //                         textClass = "text-sky-400 font-bold text-xs tracking-wide mt-3 block";
+        //                         displayLog = cleanLine.replace("## ", "");
+        //                     } else {
+        //                         textClass = "text-slate-300 leading-relaxed font-normal text-xs";
+        //                         displayLog = line.replace(/\*\*/g, "");
+        //                     }
+        //                 }
+        //                 return `<p class="${textClass} border-l-2 ${borderGlow} pl-3 py-1.5 rounded-r-md transition-all duration-200 hover:bg-slate-700/40 hover:pl-4">${displayLog}</p>`;
+        //             }).filter(html => html !== '').join('');
+        //         } else {
+        //             const currentModelContext = latest.active_model || document.getElementById('active-model-display').textContent || 'qwen2.5-coder:1.5b';
+        //             consoleBody.innerHTML = `
+        //                 <p class="text-slate-400 font-medium">[Orchestrator] Ingesting telemetry pipeline logs streams dynamically...</p>
+        //                 <p class="text-indigo-400 font-bold">[LLM Engine] Active Model Target verified as: ${currentModelContext}</p>
+        //                 <p class="text-emerald-400 font-bold">[Gate Engine] Final execution telemetry pass complete.</p>
+        //             `;
+        //         }
+        //     } catch (err) {
+        //         console.error("Live sync polling failure:", err);
+        //     }
+        // } -->
+        async function fetchLiveTraces() {
+    try {
+        const response = await fetch('/api/traces', { cache: 'no-store' });
+        if (!response.ok) return;
+        const traces = await response.json();
+        let latest = null;
+        if (Array.isArray(traces) && traces.length > 0) {
+            latest = traces[traces.length - 1];
+        } else if (traces && !Array.isArray(traces) && Object.keys(traces).length > 0) {
+            latest = traces;
+        }
+        const emptyState = document.getElementById('empty-state');
+        const pipelineContent = document.getElementById('pipeline-content');
+        const logsWrapper = document.getElementById('logs-wrapper');
+        const actionZone = document.getElementById('action-gateway-zone');
+
+        if (!latest) {
+            emptyState.classList.remove('hidden');
+            pipelineContent.classList.add('hidden');
+            return;
+        }
+        emptyState.classList.add('hidden');
+        pipelineContent.classList.remove('hidden');
+        document.getElementById('task-id-display').textContent = latest.task_id || latest.run_id || 'unknown';
+        document.getElementById('target-resource').textContent = latest.target_resource || latest.repo || 'unknown_file';
+        
+        const isPassed = typeof latest.verdict === 'boolean' ? 
+            latest.verdict : 
+            String(latest.gate_verdict || latest.verdict || '').toUpperCase().includes('PASS');
+        const verdictBadge = document.getElementById('gate-verdict');
+        const confidenceDisplay = document.getElementById('confidence-display');
+        
+        const isTestSuiteTask = String(latest.task || '').includes('triage') || 
+                                String(latest.reason || '').includes('TEST');
+
+        if (isPassed) {
+            if (actionZone) actionZone.classList.add('hidden');
+            verdictBadge.className = "bg-emerald-600 border border-emerald-700 text-white px-3.5 py-1.5 rounded-xl text-xs font-black tracking-widest flex items-center gap-1.5 shadow-[0_4px_12px_rgba(16,185,129,0.25)]";
+            verdictBadge.innerHTML = 'GATE PASS ✓';
+            logsWrapper.className = "solid-card rounded-2xl p-6 space-y-6 border-l-4 border-emerald-500 min-h-[445px] flex flex-col justify-start";
+        } else {
+            if (isTestSuiteTask) {
+                if (actionZone) actionZone.classList.add('hidden');
+            } else {
+                if (actionZone) actionZone.classList.remove('hidden');
+            }
+            verdictBadge.className = "bg-rose-600 border border-rose-700 text-white px-3.5 py-1.5 rounded-xl text-xs font-black tracking-widest flex items-center gap-1.5 shadow-[0_4px_12px_rgba(244,63,94,0.25)]";
+            verdictBadge.innerHTML = 'GATE FAIL ×';
+            logsWrapper.className = "solid-card rounded-2xl p-6 space-y-6 border-l-4 border-rose-500 min-h-[445px] flex flex-col justify-start";
+        }
+        
+        let rawConf = parseFloat(latest.confidence || 0);
+        let displayScore = rawConf > 1 ? (rawConf / 100).toFixed(2) : rawConf.toFixed(2);
+        
+        confidenceDisplay.textContent = displayScore;
+        
+        if (parseFloat(displayScore) >= 0.70) {
+            confidenceDisplay.className = "text-4xl font-black text-emerald-600 mono leading-none tracking-tighter shadow-sm";
+        } else {
+            confidenceDisplay.className = "text-4xl font-black text-rose-600 mono leading-none tracking-tighter shadow-sm animate-pulse";
+        }
+        
+        if (latest.reasons || latest.reason) {
+            document.getElementById('reason-text').textContent = Array.isArray(latest.reasons) ? latest.reasons.join(' ') : String(latest.reason);
+        }
+        const consoleBody = document.getElementById('console-body');
+        let logArray = latest.logs || latest.steps || [];
+        const isTextReportTask = String(latest.task || '').includes('review') || 
+                                 String(latest.task || '').includes('doc') || 
+                                 String(latest.task || '').includes('triage') || 
+                                 String(latest.task || '').includes('depend') || 
+                                 String(latest.reason || '').includes('depend') || 
+                                 String(latest.reason || '').includes('review') || 
+                                 String(latest.reason || '').includes('TEST');
+        
+        const aiReport = latest.ai_analysis || (latest.agent_detail && latest.agent_detail.ai_analysis);
+        if (isTextReportTask && aiReport) {
+            if (typeof aiReport === 'string' && aiReport.includes('\n')) {
+                logArray = aiReport.split('\n');
+            } else {
+                logArray = [aiReport];
+            }
+            const leftTitle = document.getElementById('console-left-title');
+            if (leftTitle) {
+                const taskStr = String(latest.task || '').toLowerCase();
+                if (taskStr.includes('review')) leftTitle.textContent = "AI CODE REVIEW MANUAL";
+                else if (taskStr.includes('doc')) leftTitle.textContent = "AI GENERATED SPECIFICATION MANUAL";
+                else if (taskStr.includes('triage')) leftTitle.textContent = "AI TEST DETAILED TRIAGE REPORT";
+                else if (taskStr.includes('depend')) leftTitle.textContent = "AI DEPENDENCY SECURITY & AUDIT REPORT";
+                else leftTitle.textContent = "AI TELEMETRY ANALYSIS REPORT";
+            }
+        } else {
+            if (document.getElementById('console-left-title')) {
+                document.getElementById('console-left-title').textContent = "PIPELINE RUNTIME CONSOLE OUTPUT";
+            }
+        }
+        if (logArray.length > 0) {
+            let processedLines = [];
+            logArray.forEach(block => {
+                if (typeof block === 'string' && block.includes('\n')) {
+                    processedLines.push(...block.split('\n'));
+                } else {
+                    processedLines.push(block);
+                }
+            });
+            consoleBody.innerHTML = processedLines.map(line => {
+                let cleanLine = String(line).trim();
+                if (!cleanLine) return '';
+                let textClass = "text-slate-300 font-normal text-xs";
+                let borderGlow = "border-slate-700/40 bg-slate-800/20";
+                let displayLog = line;
+                if (cleanLine.includes("FAILED") || cleanLine.includes("Error") || cleanLine.includes("Failure")) {
+                    textClass = "text-rose-400 font-bold";
+                    borderGlow = "border-rose-900/50 bg-rose-950/20";
+                } else if (cleanLine.includes("Passed") || cleanLine.includes("Finished") || cleanLine.includes("Completed") || cleanLine.includes("complete")) {
+                    textClass = "text-emerald-400 font-semibold";
+                    borderGlow = "border-emerald-900/50 bg-emerald-950/20";
+                } else if (isTextReportTask) {
+                    if (cleanLine.startsWith("# ")) {
+                        textClass = "text-slate-100 font-extrabold text-sm tracking-wide border-b border-slate-700 pb-1 mb-2 block";
+                        displayLog = cleanLine.replace("# ", "");
+                    } else if (cleanLine.startsWith("## ")) {
+                        textClass = "text-sky-400 font-bold text-xs tracking-wide mt-3 block";
+                        displayLog = cleanLine.replace("## ", "");
+                    } else {
+                        textClass = "text-slate-300 leading-relaxed font-normal text-xs";
+                        displayLog = line.replace(/\*\*/g, "");
+                    }
+                }
+                return `<p class="${textClass} border-l-2 ${borderGlow} pl-3 py-1.5 rounded-r-md transition-all duration-200 hover:bg-slate-700/40 hover:pl-4">${displayLog}</p>`;
+            }).filter(html => html !== '').join('');
+        } else {
+            const currentModelContext = latest.active_model || document.getElementById('active-model-display').textContent || 'qwen2.5-coder:1.5b';
+            consoleBody.innerHTML = `
+                <p class="text-slate-400 font-medium">[Orchestrator] Ingesting telemetry pipeline logs streams dynamically...</p>
+                <p class="text-indigo-400 font-bold">[LLM Engine] Active Model Target verified as: ${currentModelContext}</p>
+                <p class="text-emerald-400 font-bold">[Gate Engine] Final execution telemetry pass complete.</p>
+            `;
+        }
+    } catch (err) {
+        console.error("Live sync polling failure:", err);
+    }
+}
+
+        async function pingInfrastructure() {
+            const startApi = performance.now();
+            try {
+                await fetch('/api/traces', { cache: 'no-store' });
+                document.getElementById('api-latency').textContent = Math.round(performance.now() - startApi) + 'ms';
+                document.getElementById('api-latency').className = "text-emerald-900 font-black text-right";
+            } catch {
+                document.getElementById('api-latency').textContent = "ERR";
+                document.getElementById('api-latency').className = "text-rose-900 font-black text-right";
+            }
+            const startGitea = performance.now();
+            try {
+                await fetch('http://localhost:3000', { mode: 'no-cors', cache: 'no-store' });
+                document.getElementById('gitea-latency').textContent = Math.round(performance.now() - startGitea) + 'ms';
+                document.getElementById('gitea-latency').className = "text-emerald-900 font-black text-right";
+            } catch {
+                document.getElementById('gitea-latency').textContent = "OFFLINE";
+                document.getElementById('gitea-latency').className = "text-rose-900 font-black text-right text-[10px]";
+            }
+        }
+
+        const toggleBtn = document.getElementById('toggle-trace-btn');
+        const consoleContainer = document.getElementById('console-container');
+        const chevronIcon = document.getElementById('chevron-icon');
+        toggleBtn.addEventListener('click', () => {
+            if (consoleContainer.classList.contains('hidden')) {
+                consoleContainer.classList.remove('hidden');
+                chevronIcon.style.transform = 'rotate(180deg)';
+            } else {
+                consoleContainer.classList.add('hidden');
+                chevronIcon.style.transform = 'rotate(0deg)';
+            }
+        });
+
+        document.getElementById('commit-fix-btn').addEventListener('click', async () => {
+            const btn = document.getElementById('commit-fix-btn');
+            btn.textContent = "PATCHING ENVIRONMENT...";
+            btn.disabled = true;
+
+            try {
+                const response = await fetch('/api/commit-fix', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                
+                if (response.ok) {
+                    btn.textContent = "FIX APPLIED SUCCESSFULLY!";
+                    btn.className = "mono text-xs font-bold bg-emerald-600 text-white px-4 py-2 rounded-xl shadow-md cursor-not-allowed";
+                } else {
+                    btn.textContent = "PATCH CONTEXT FAILED";
+                    btn.disabled = false;
+                }
+            } catch (err) {
+                console.error("Action gateway routing error:", err);
+                btn.textContent = "ROUTING ERROR";
+                btn.disabled = false;
+            }
+        });
+
+        setInterval(fetchLiveTraces, 2000);
+        setInterval(pingInfrastructure, 4000);
+        fetchLiveTraces();
+        pingInfrastructure();
+    </script>
+</body>
+</html>
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

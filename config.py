@@ -1,0 +1,2 @@
+GITEA_URL = "http://localhost:3000"
+GITEA_TOKEN = "db71863a782cf611b8c85de96743747b4cb83e20"
