@@ -2,3 +2,4 @@ venv/
 .env  
 __pycache__/  
 traces.json 
+core_platform/latest_trace.json 
