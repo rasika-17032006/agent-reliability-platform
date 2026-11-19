@@ -20,4 +20,4 @@ The core platform exposes five dedicated execution channels via a unified teleme
 * `/core_platform` - Orchestrates agent routing protocols and telemetry ingestion loops. 
 * `/agents` - Holds the specific operational logic for the 5 validation sub-processes. 
 * `/dashboard` - Frontend web canvas mapping real-time pipeline status and agent certainty charts. 
-* `/e-commerce-payment-api` - Target microservice repository used for evaluation execution passes.
+* `/e-commerce-payment-api` - Sample repository included for demonstrating and testing the platform.
